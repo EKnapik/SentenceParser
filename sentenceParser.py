@@ -345,7 +345,6 @@ nouns ending in al is an adjective
 //nouns after not (*) are verbs if they can be
 //noun noun check second noun if can be verb -> change second to verb (pn noun -> pn vb)
 nieve bays
-Saucy is a gossiping son of a bitch.
 
 
 if __name__ == "__main__":
