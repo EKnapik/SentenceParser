@@ -15,7 +15,7 @@ def mkFrequencyTable():
     """
     words = {} # makes the dictionary that will be used to add words...
     ignoreTags = ['*', '--', '@', '#', '%', '^', '&', '-', '+', '=']
-    fileNames = os.listdir('C:/Users/Eric/Desktop/Coding/MyGoogleNow/brown')
+    fileNames = os.listdir('C:/Users/Eric/Desktop/Coding/MyGoogleNow/brown') #this will change per person
     for num in range(0, len(fileNames) - 2): #prevents it from importing .py
         file = fileNames[num]
         str(file)
