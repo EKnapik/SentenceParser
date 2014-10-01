@@ -12,3 +12,8 @@ tagger to fix any errors the unigram tagger made.
 
 This tagger is probabbly 90% accuracte at parsing a sentence perfectly, it is only restricted by words that it does not
 know and this can be fixed if I implement a better corpus to make my frequency table from.
+
+I have commented out the make frequency file because you need to first download the brown corpus .txt files
+    this is easier if you use import nltk.corpus.brown(). I just have not implemented it with this functionallity
+    this project was more for understanding how nltk taggs its words and trying to implement my own version of it
+    Just use the frequency table file I have here and have it in the same directory as the .py
