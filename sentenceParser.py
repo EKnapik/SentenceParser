@@ -15,7 +15,7 @@ def mkFrequencyTable():
     """
     words = {} # makes the dictionary that will be used to add words...
     ignoreTags = ['*', '--', '@', '#', '%', '^', '&', '-', '+', '=']
-    fileNames = os.listdir('C:/Users/Eric/Desktop/Coding/MyGoogleNow/brown') #this will change per person
+    fileNames = os.listdir(".") #this will change per person
     for num in range(0, len(fileNames) - 2): #prevents it from importing .py
         file = fileNames[num]
         str(file)
@@ -308,8 +308,14 @@ def main():
     print("1. Make a new frequency table file")
     print("2. Use the existing frequency table file")
     choice = int(input())
+    """
+    I have commented out the make frequency file because you need to first download the brown corpus .txt files
+    this is easier if you use import nltk.corpus.brown(). I just have not implemented it with this functionallity
+    this project was more for understanding how nltk taggs its words and trying to implement my own version of it
+    Just use the frequency table file I have here and have it in the same directory as the .py
+    """
     if choice == 1:
-        mkFrequencyFile()
+        #mkFrequencyFile()
     elif choice == 2:
         table = importFrequencyTable()
         sentence = None
