@@ -174,9 +174,7 @@ def importFrequencyTable():
         else:
             line = line.strip()
             line = line.split()
-            #print(line[0])
-            #print(line[1])
-            #print(line[2])
+
             tagFrequency = TagFrequency()
             tagFrequency.tag = line[1]
             tagFrequency.frequency = float(line[2])
@@ -246,15 +244,15 @@ def finalRuleCheck(sentenceLst, freqTable):
         word = sentenceLst[i].word
         tag = sentenceLst[i].tag
 
-        if prevTag == 'to'and tag == 'nn':
+        if prevTag == 'to' and tag == 'nn':
             if canBeTag(word, 'vb', freqTable):
                 sentenceLst[i].tag = 'vb'
 
-        if prevWord == 'would'and tag == 'nn':
+        if prevWord == 'would' and tag == 'nn':
             if canBeTag(word, 'vb', freqTable):
                 sentenceLst[i].tag = 'vb'
 
-        if prevTag == '*'and tag == 'nn':
+        if prevTag == '*' and tag == 'nn':
             if canBeTag(word, 'vb', freqTable):
                 sentenceLst[i].tag = 'vb'
 
@@ -314,22 +312,24 @@ def main():
     this project was more for understanding how nltk taggs its words and trying to implement my own version of it
     Just use the frequency table file I have here and have it in the same directory as the .py
     """
+
     if choice == 1:
-        #mkFrequencyFile()
+        pass #mkFrequencyFile()
     elif choice == 2:
         table = importFrequencyTable()
+        print( canBeTag("notice", "nn", table) )
         sentence = None
         while sentence != "":
-                sentence = str(input("Enter the sentence to parse: "))
-                if sentence != "":
-                    sentence = re.sub("([!,.:-_;?()])", r" \1", sentence) #regular expressions
-                    #print(sentence)
-                    sentenceParser(sentence, table)
-                    print()
-                    input()
-                    os.system('cls')
+            sentence = str(input("Enter the sentence to parse: "))
+            if sentence != "":
+        	    sentence = re.sub("([!,.:-_;?()])", r" \1", sentence) #regular expressions
+        	    #print(sentence)
+        	    sentenceParser(sentence, table)
+        	    print()
+        	    input()
+        	    os.system('clear')
     else:
-        pass
+   	    pass
 
 
 
