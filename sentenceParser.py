@@ -230,6 +230,49 @@ def sentenceParser(sentence, frequencyTable):
     for word in finishedSentence:
         print(word.word, ": ", word.tag, "   ", sep='', end = '')
 
+
+def fileOutSentenceParser(frequencyTable, filename):
+    """
+    OUTPUTS TO FILE
+    this will go though each word in the sentence wich is passed in
+    then it will compare each word to that in the frequencyTable and
+    see if it is there. If it is then it will pick the highest % of 
+    occurance of that word. and assign a tag to the word
+    if the word isnt in the frequencyTable then the word's tag is nn
+    for noun
+    """
+    outFilename = filename + '.out'
+    outfile = open( outFilename, 'w' )
+
+    for sentence in open(filename):
+        sentence = sentence.strip()
+        sentence = re.sub("([!,.:-_;?()])", r" \1", sentence) #regular expressions
+        sentence = fixContractions(sentence, frequencyTable)
+        sentence = sentence.split()
+    # sentence[0] = sentence[0].title()
+        finishedSentence = []
+        tempFrequency = 0
+        for word in sentence:
+            #print(word)
+            tag = 'nn'
+            if word in frequencyTable:
+                tempFrequency = 0
+                for tagObject in frequencyTable[word]:
+                    #print(tagObject.frequency)
+                    if tagObject.frequency > tempFrequency:
+                        tempFrequency = tagObject.frequency
+                        tag = tagObject.tag
+                        #print(word, " ", tag)
+                #tag = frequencyTable[word][0].tag #not sure how to get largest tag
+            parsedWord = ParsedWord(word, tag)
+            #print(parsedWord.word)
+            finishedSentence.append(parsedWord)
+
+        finishedSentence = finalRuleCheck(finishedSentence, frequencyTable)
+        
+        for word in finishedSentence:
+            outfile.write(word.word + "|~|" + word.tag + "   ")
+
 def finalRuleCheck(sentenceLst, freqTable):
     """
     this is the final rule check similar to the Brill tagger this
@@ -305,6 +348,7 @@ def main():
     print("Enter your choice: ")
     print("1. Make a new frequency table file")
     print("2. Use the existing frequency table file")
+    print("3. Process File and output to file")
     choice = int(input())
     """
     I have commented out the make frequency file because you need to first download the brown corpus .txt files
@@ -317,7 +361,6 @@ def main():
         pass #mkFrequencyFile()
     elif choice == 2:
         table = importFrequencyTable()
-        print( canBeTag("notice", "nn", table) )
         sentence = None
         while sentence != "":
             sentence = str(input("Enter the sentence to parse: "))
@@ -328,6 +371,12 @@ def main():
         	    print()
         	    input()
         	    os.system('clear')
+
+    elif choice == 3:
+        table = importFrequencyTable()
+        filename = str(input("Enter the file to parse: "))
+        fileOutSentenceParser( table, filename)
+
     else:
    	    pass
 
